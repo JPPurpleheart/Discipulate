@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { APIConnectionsService } from '../../core/services/apiconnections.service';
 
 @Component({
   selector: 'app-login',
@@ -12,13 +13,23 @@ export class LoginComponent implements OnInit {
     password: null
   }
 
-  constructor() { }
+  constructor(private apiconnection: APIConnectionsService) { }
+
+  public error = null;
 
   ngOnInit(): void {
   }
 
   submitLogin() {
     console.log(this.form);
+    return this.apiconnection.login(this.form).subscribe(
+      data=>console.log(data),
+      error=>this.handleError(error)
+    );
+  }
+
+  handleError(error: any) {
+    this.error = error.error.error;
   }
 
 }
