@@ -1,1 +1,18 @@
-<p>login works!</p>
+<div class="col-12 bg-dark text-light d-inline-flex justify-content-center mw-100">
+    <div class="card bg-dark m-5">
+        <div class="card-header">Login</div>
+        <div class="card-body">
+            <form #loginForm="ngForm" (ngSubmit)="submitLogin()">
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" class="form-control bg-dark text-light" id="email" name="email" [(ngModel)]="form.email" required>
+                </div>
+                <div class="mb-3">
+                  <label for="password" class="form-label">Password</label>
+                  <input type="password" class="form-control bg-dark text-light" id="password" name="password" [(ngModel)]="form.password" required>
+                </div>
+                <button type="submit" class="btn btn-danger" [disabled]="!loginForm.valid">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
