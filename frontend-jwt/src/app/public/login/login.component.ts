@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { APIConnectionsService } from '../../core/services/apiconnections.service';
+import { TokenHandlerService } from '../../core/services/token-handler.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
     password: null
   }
 
-  constructor(private apiconnection: APIConnectionsService) { }
+  constructor(private apiconnection: APIConnectionsService, private tokenHandler: TokenHandlerService) { }
 
   public error = null;
 
@@ -21,11 +22,16 @@ export class LoginComponent implements OnInit {
   }
 
   submitLogin() {
-    console.log(this.form);
+    // console.log(this.form);
     return this.apiconnection.login(this.form).subscribe(
-      data=>console.log(data),
+      data=>this.handleResponse(data),
       error=>this.handleError(error)
     );
+  }
+
+  handleResponse(data:any) {
+    console.log(data.access_token);
+    this.tokenHandler.handle(data.access_token);
   }
 
   handleError(error: any) {
