@@ -2,9 +2,10 @@
     <div class="container-fluid">
       <a class="navbar-brand"><img src="../../../assets/Discipulate LOGO.png" height="75px" alt="Logo Discipulate"></a>
       <div>
-        <a class="navbar-brand text-light" routerLink="login">Login</a>
-        <a class="navbar-brand text-light" routerLink="signup">Signup</a>
-        <a class="navbar-brand text-light" routerLink="profile">Profile</a>
+        <a class="navbar-brand text-light" routerLink="login" *ngIf="!loggedIn">Login</a>
+        <a class="navbar-brand text-light" routerLink="signup" *ngIf="!loggedIn">Signup</a>
+        <a class="navbar-brand text-light" href="#" (click)="logout($event)" *ngIf="loggedIn">Logout</a>
+        <a class="navbar-brand text-light" routerLink="profile" *ngIf="loggedIn">Profile</a>
       </div>
     </div>
   </nav>

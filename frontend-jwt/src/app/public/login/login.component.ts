@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { APIConnectionsService } from '../../core/services/apiconnections.service';
 import { TokenHandlerService } from '../../core/services/token-handler.service';
+import { AuthHandlerService } from 'src/app/core/services/auth-handler.service';
+import{ Router } from '@angular/router'
 
 @Component({
   selector: 'app-login',
@@ -14,7 +16,7 @@ export class LoginComponent implements OnInit {
     password: null
   }
 
-  constructor(private apiconnection: APIConnectionsService, private tokenHandler: TokenHandlerService) { }
+  constructor(private apiconnection: APIConnectionsService, private tokenHandler: TokenHandlerService, private authHandler: AuthHandlerService, private router: Router) { }
 
   public error = null;
 
@@ -32,6 +34,8 @@ export class LoginComponent implements OnInit {
   handleResponse(data:any) {
     console.log(data.access_token);
     this.tokenHandler.handle(data.access_token);
+    this.authHandler.changeAuthStatus(true);
+    this.router.navigateByUrl('/profile');
   }
 
   handleError(error: any) {

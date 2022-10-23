@@ -44,4 +44,8 @@ export class TokenHandlerService {
     return JSON.parse(atob(payload));
   }
 
+  loggedIn() {
+    return this.isValid();
+  }
+
 }
